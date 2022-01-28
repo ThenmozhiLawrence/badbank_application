@@ -13,6 +13,7 @@ class Register extends Component {
       email: "",
       password: "",
       password2: "",
+      balance:100,
       errors: {}
     };
   }
@@ -43,7 +44,8 @@ class Register extends Component {
       name: this.state.name,
       email: this.state.email,
       password: this.state.password,
-      password2: this.state.password2
+      password2: this.state.password2,
+      balance:this.state.balance
     };
 
     this.props.registerUser(newUser, this.props.history);
@@ -135,6 +137,8 @@ class Register extends Component {
                   }}
                   type="submit"
                   className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                  onClick={() => {
+                    alert('You have successfully registered. Please login to do more!!');}}
                 >
                   Sign up
                 </button>
