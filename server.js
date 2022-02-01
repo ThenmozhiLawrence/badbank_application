@@ -22,11 +22,13 @@ const db = require("./config/keys").mongoURI;
 // Connect to MongoDB
 mongoose
   .connect(
-    db,
+    process.env.MONGODB_URI || db,
     { useNewUrlParser: true }
-  )
-  .then(() => console.log("MongoDB successfully connected"))
-  .catch(err => console.log(err));
+  );
+  
+  mongoose.connection.on('connected', () => {
+    console.log('Mongoose is connected!!!!');
+});
 
 // Passport middleware
 app.use(passport.initialize());

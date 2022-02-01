@@ -53,7 +53,6 @@ class Dashboard extends Component {
             }}
             className="btn btn-large waves-effect waves-light hoverable orange accent-3">
             Submit</button>
-            <a href="deposit">
             <button
               style={{
                 width: "150px",
@@ -68,7 +67,7 @@ class Dashboard extends Component {
               className="btn btn-large waves-effect waves-light hoverable green accent-3" >
               Deposit 
             </button>  
-            </a>
+          
             <input type="text" placeholder="enter amount to be withdrawn" id="withdraw_amount" name="withdraw_amount" 
             style={{display:"none"}}/>
             <button id="withdraw_submit" style={{display:"none"}} 
