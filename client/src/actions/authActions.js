@@ -1,4 +1,4 @@
-import axios from "axios";
+import {axiosInstance} from "../page";
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 
@@ -6,7 +6,7 @@ import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
 
 // Register User
 export const registerUser = (userData, history) => dispatch => {
-  axios
+  axiosInstance
     .post("/api/users/register", userData)
     .then(res => history.push("/dashboard"))
     .catch(err =>
@@ -19,7 +19,7 @@ export const registerUser = (userData, history) => dispatch => {
 
 // Login - get user token
 export const loginUser = userData => dispatch => {
-  axios
+  axiosInstance
     .post("/api/users/login", userData)
     .then(res => {
       // Save to localStorage
