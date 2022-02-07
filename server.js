@@ -17,19 +17,16 @@ app.use(
 app.use(bodyParser.json());
 
 // DB Config
-const db = require("./config/keys").mongoURL;
+const db = require("./config/keys").mongoURI;
 
 // Connect to MongoDB
 mongoose
   .connect(
-    process.env.MONGODB_URL || db,
-    { useNewUrlParser: true,
-      useUnifiedTopology: true }
-  );
-
-  mongoose.connection.on('connected', () => {
-    console.log('Mongoose is connected!!!!');
-});
+    db,
+    { useNewUrlParser: true }
+  )
+  .then(() => console.log("MongoDB successfully connected"))
+  .catch(err => console.log(err));
 
 // Passport middleware
 app.use(passport.initialize());
@@ -40,14 +37,13 @@ require("./config/passport")(passport);
 // Routes
 app.use("/api/users", users);
 
-//if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, 'client/build')));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
   app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-   // res.render('index', {});
+    res.sendFile(path.resolve(__dirname,  "client", "build", "index.html"));
   });
-//}
+}
 
-//const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5000;
 
-app.listen(process.env.PORT || 5000, () => {console.log("server is running")} );
+app.listen(port, () => console.log(`Server up and running on port ${port} !`));
